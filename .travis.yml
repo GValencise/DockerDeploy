@@ -8,3 +8,16 @@ before_install:
 
 script:
   - docker run -e CI=true valegio/frontend_dev npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "frontend"
+  env: "Frontend-env"
+  bucket_name: "elasticbeanstalk-us-east-2-971346109699"
+  bucket_path: "frontend"
+  on:
+    branch: master
+  access_key_id: $AWS_BEANSTALK_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_BEANSTALK_SECRET_KEY"
