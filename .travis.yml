@@ -1,0 +1,10 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t valegio/frontend_dev -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true valegio/frontend_dev npm run test -- --coverage
